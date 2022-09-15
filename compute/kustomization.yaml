@@ -1,0 +1,8 @@
+resources:
+  - "deployment.yaml"
+
+# from https://raw.githubusercontent.com/neondatabase/neon/f99ccb5041eebcdb89efc24f5e0cc501fb1a9039/compute_tools/tests/cluster_spec.json
+configMapGenerator:
+  - name: config
+    files:
+      - config.json

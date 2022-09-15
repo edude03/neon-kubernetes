@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: compute-deployment
+spec:
+  selector:
+    matchLabels:
+      app: compute
+  template:
+    metadata:
+      labels:
+        app: compute
+    spec:
+      containers:
+        - name: compute
+          image: neondatabase/compute-node
+          env:
+            - name: DATABASE_URL
+              value: postgresql://cloud_admin@localhost/postgres
+            - name: PGDATA
+              value: /var/db/postgres/compute
+          args:
+            - --connstr
+            - $(DATABASE_URL)
+            - --pgdata
+            - $(PGDATA)
+            - --spec-path
+            - /etc/config/config.json
+          resources:
+            requests:
+              memory: "1Gi"
+              cpu: "1000m"
+            limits:
+              memory: "1Gi"
+              cpu: "1000m"
+          ports:
+            - containerPort: 8080
+          volumeMounts:
+            - name: config
+              mountPath: /etc/config
+      volumes:
+        - name: config
+          configMap:
+            name: config
