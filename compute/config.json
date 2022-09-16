@@ -177,23 +177,5 @@
       }
     ]
   },
-  "delta_operations": [{
-      "action": "delete_db",
-      "name": "zenith_test"
-    },
-    {
-      "action": "rename_db",
-      "name": "DB",
-      "new_name": "DB2"
-    },
-    {
-      "action": "delete_role",
-      "name": "zenith2"
-    },
-    {
-      "action": "rename_role",
-      "name": "zenith new",
-      "new_name": "zenith \"new\""
-    }
-  ]
+  "delta_operations": []
 }

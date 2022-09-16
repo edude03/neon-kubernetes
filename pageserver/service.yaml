@@ -8,5 +8,6 @@ spec:
     app: pageserver
   ports:
     - port: 6400
-      name: something
-    # - port:
+      name: pg
+    - port: 9898
+      name: http

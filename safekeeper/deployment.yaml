@@ -16,15 +16,22 @@ spec:
           image: neondatabase/neon
           command:
             - safekeeper
+          env:
+            - name: POD_IP
+              valueFrom:
+                fieldRef:
+                  fieldPath: status.podIP
           args:
             - --id # What is ID for?
             - "1"
             - -l
-            - "0.0.0.0:5454"
+            - "$(POD_IP):5454"
             - --listen-http
             - "0.0.0.0:7676"
             - "--pageserver"
             - "pageserver:6400"
+            - --broker-endpoints
+            - "etcd:2379"
           resources:
             requests:
               memory: "32Mi"
